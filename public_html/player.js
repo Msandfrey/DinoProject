@@ -25,6 +25,11 @@ var plantsEatenAtLevel = 0;
 var animalsEatenAtLevel = 0;
 var playerLevel = 1;
 var playerDamage = 1;
+//directional flags
+var moveUp = false;
+var moveDown = true;
+var moveLeft = true;
+var moveRight = false;
 function player(game, image, aImage, attackSound)
 {
     var upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -42,7 +47,10 @@ function player(game, image, aImage, attackSound)
     
     swipe = game.add.sprite(250, 250, aImage);
     swipe.animations.add('attackSwipe');
-    dino.animations.add('walk');
+    dino.animations.add('upLeft',[2]);
+    dino.animations.add('upRight',[1]);
+    dino.animations.add('downRight',[3]);
+    dino.animations.add('downLeft',[0]);
     game.physics.p2.enable(dino, false);
     game.physics.p2.enable(swipe, false); // 'true' to show debug box for attack
     game.physics.enable(dino, Phaser.Physics.ARCADE);
@@ -129,9 +137,12 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = false;
                 rightFront = false;
-                dino.animations.play('walk', 5, true);
-                dino.body.angle = -90;
-                dino.angle = -90;
+                moveLeft = true;
+                moveRight = false;
+                if(moveDown)dino.animations.play('downLeft');
+                else dino.animations.play('upLeft');
+                //dino.body.angle = -90;
+                //dino.angle = -90;
                 dino.body.moveLeft(playerSpeed);
             }
             else if (rightKey.isDown)
@@ -141,9 +152,12 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = false;
                 rightFront = true;
-                dino.animations.play('walk', 5, true);
-                dino.body.angle = 90;
-                dino.angle = 90;
+                moveRight = true;
+                moveLeft = false;
+                if(moveDown)dino.animations.play('downRight');
+                else dino.animations.play('upRight');
+                //dino.body.angle = 90;
+                //dino.angle = 90;
                 dino.body.moveRight(playerSpeed);
             }
             if (upKey.isDown)
@@ -153,9 +167,12 @@ function player(game, image, aImage, attackSound)
                 upFront = true;
                 downFront = false;
                 rightFront = false;
-                dino.animations.play('walk', 5, true);
-                dino.body.angle = 0;
-                dino.angle = 0;
+                moveUp = true;
+                moveDown = false;
+                if(moveRight)dino.animations.play('upRight');
+                else dino.animations.play('upLeft');
+                //dino.body.angle = 0;
+                //dino.angle = 0;
                 dino.body.moveUp(playerSpeed);
             }
             else if (downKey.isDown)
@@ -165,9 +182,12 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = true;
                 rightFront = false;
-                dino.animations.play('walk', 5, true);
-                dino.body.angle = 180;
-                dino.angle = 180;
+                moveDown = true;
+                moveUp = false;
+                if(moveRight)dino.animations.play('downRight');
+                else dino.animations.play('downLeft');
+                //dino.body.angle = 180;
+                //dino.angle = 180;
                 dino.body.moveDown(playerSpeed);
             }
             if (spaceKey.isDown && isAttacking == false)

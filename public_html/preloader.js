@@ -54,6 +54,9 @@ var preloader = {
             game.load.image('bar3','assets/bar3.png');
             game.load.image('bar4','assets/bar4.png');
             
+            //new sprites that arent mine
+            game.load.spritesheet('tyrunt', 'assets/TyruntSprite.png', 96, 96, 4);
+            
             
             // Loading music
             game.load.audio('menuMusic', 'assets/Extinction Menu Music.ogg');

@@ -30,8 +30,8 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, ''); //{ preload: preload, cre
 //var extinction = {};
 var circle;
 var dinoPlayer;
-var playerHeight = 60;
-var playerWidth = 25;
+var playerHeight = 40;
+var playerWidth = 40;
 //var badDino;
 var playerCircle;
 var enemyAlert = false;
@@ -87,8 +87,8 @@ var level_0 = {
         bg_layer.debug = false; // highlight collidable tiles
         game.physics.enable(bg_layer);
 
-        
-        dinoPlayer = new player(game, 'dinoSelf', 'playerAttackAni', 
+        //original sprite is dinoSelf
+        dinoPlayer = new player(game, 'tyrunt', 'playerAttackAni', 
             'swipeSound');
         dinoPlayer.getSprite().width = playerWidth;
         dinoPlayer.getSprite().height = playerHeight;
@@ -175,7 +175,7 @@ var level_0 = {
             }
            if(Phaser.Circle.intersects(playerCircle,enemyPool[l].getACircle()) === true)
            {
-               if(enemyPool[l].queryAttack() == true)
+               if(enemyPool[l].queryAttack() === true)
                {
                     enemyPool[l].getEnemyAttack().revive();
                     enemyPool[l].getEnemyAttack().animations.stop(true);
