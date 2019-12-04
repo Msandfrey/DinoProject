@@ -47,10 +47,12 @@ function player(game, image, aImage, attackSound)
     
     swipe = game.add.sprite(250, 250, aImage);
     swipe.animations.add('attackSwipe');
+    //set up movement animations
     dino.animations.add('upLeft',[2]);
     dino.animations.add('upRight',[1]);
     dino.animations.add('downRight',[3]);
     dino.animations.add('downLeft',[0]);
+    
     game.physics.p2.enable(dino, false);
     game.physics.p2.enable(swipe, false); // 'true' to show debug box for attack
     game.physics.enable(dino, Phaser.Physics.ARCADE);
@@ -137,8 +139,10 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = false;
                 rightFront = false;
+                //set directional flags for when moving up and down
                 moveLeft = true;
                 moveRight = false;
+                //so player faces right direction
                 if(moveDown)dino.animations.play('downLeft');
                 else dino.animations.play('upLeft');
                 //dino.body.angle = -90;
@@ -152,8 +156,10 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = false;
                 rightFront = true;
+                //set directional flags for when moving up and down
                 moveRight = true;
                 moveLeft = false;
+                //so player faces right direction
                 if(moveDown)dino.animations.play('downRight');
                 else dino.animations.play('upRight');
                 //dino.body.angle = 90;
@@ -167,8 +173,10 @@ function player(game, image, aImage, attackSound)
                 upFront = true;
                 downFront = false;
                 rightFront = false;
+                //set directional flags for when moving left and right
                 moveUp = true;
                 moveDown = false;
+                //so player faces right direction
                 if(moveRight)dino.animations.play('upRight');
                 else dino.animations.play('upLeft');
                 //dino.body.angle = 0;
@@ -182,8 +190,10 @@ function player(game, image, aImage, attackSound)
                 upFront = false;
                 downFront = true;
                 rightFront = false;
+                //set directional flags for when moving left and right
                 moveDown = true;
                 moveUp = false;
+                //so player faces right direction
                 if(moveRight)dino.animations.play('downRight');
                 else dino.animations.play('downLeft');
                 //dino.body.angle = 180;

@@ -325,7 +325,7 @@ var level_0 = {
     spawnOnOtherMobs: function(eDino) {
         for (i in enemyPool){
             if (Phaser.Circle.intersects(eDino.getACircle(), enemyPool[i].getACircle() )
-                && enemyPool[i] != eDino){
+                && enemyPool[i] !== eDino){
                 
                 return true;
             }
